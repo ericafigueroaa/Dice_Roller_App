@@ -2,14 +2,15 @@ package com.example.dice_roller_app
 
 interface DiceContract {
     interface View{
-        fun showNumber()
+        fun showNumber(num:Int)
     }
 
     interface Presenter{
-        fun getRandomNumber():Int
+        fun getRandomNumber()
     }
 
     interface Model{
-        fun randomNumber():Int
+        fun setRandomNumber()
+        var imageResource: Int
     }
 }

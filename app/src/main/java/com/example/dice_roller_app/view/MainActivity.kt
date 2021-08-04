@@ -12,32 +12,23 @@ import com.example.dice_roller_app.presenter.DicePresenter
 class MainActivity : AppCompatActivity(), DiceContract.View{
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var dicePresenter: DicePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setOnClickListeners()
+        dicePresenter=DicePresenter(this,DiceModel())
     }
 
     private fun setOnClickListeners(){
         binding.buttonRoll.setOnClickListener {
-            showNumber()
+            dicePresenter.getRandomNumber()
         }
     }
 
-    override fun showNumber() {
-        val dicePresenter=DicePresenter(this,DiceModel( 6))
-        val dR= when(dicePresenter.getRandomNumber())
-        {
-            1-> R.drawable.dice1
-            2-> R.drawable.dice2
-            3-> R.drawable.dice3
-            4-> R.drawable.dice4
-            5-> R.drawable.dice5
-            6-> R.drawable.dice6
-            else -> R.drawable.dice1
-        }
-        binding.imageViewDice.setImageResource(dR)
+    override fun showNumber(imageResource: Int) {
+        binding.imageViewDice.setImageResource(imageResource)
     }
 }
